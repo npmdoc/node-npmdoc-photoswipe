@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="http://photoswipe.com"
-
-    >photoswipe (v4.1.1)</a>
+    <a href="http://photoswipe.com">photoswipe (v4.1.1)</a>
 </h1>
 <h4>JavaScript gallery</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.photoswipe">module photoswipe</a><ol>
 
@@ -87,20 +80,20 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">photoswipe = function (template, UiClass, items, options){
 
-<span class="apidocCodeCommentSpan">/*&#x3e;&#x3e;framework-bridge*/
+<span class="apidocCodeCommentSpan">/*&gt;&gt;framework-bridge*/
 </span>/**
  *
  * Set of generic functions used by gallery.
  *
- * You&#x27;re free to modify anything here as long as functionality is kept.
+ * You're free to modify anything here as long as functionality is kept.
  *
  */
 var framework = {
 	features: null,
 	bind: function(target, type, listener, unbind) {
-		var methodName = (unbind ? &#x27;remove&#x27; : &#x27;add&#x27;) + &#x27;EventListener&#x27;;
-		type = type.split(&#x27; &#x27;);
-		for(var i = 0; i &#x3c; type.length; i++) {
+		var methodName = (unbind ? 'remove' : 'add') + 'EventListener';
+		type = type.split(' ');
+		for(var i = 0; i &lt; type.length; i++) {
 			if(type[i]) {
 				target[methodName]( type[i], listener, false);
 			}
@@ -110,7 +103,7 @@ var framework = {
 		return (obj instanceof Array);
 	},
 	createEl: function(classes, tag) {
-		var el = document.createElement(tag || &#x27;div&#x27;);
+		var el = document.createElement(tag || 'div');
 		if(classes) {
 			el.className = classes;
 		}
@@ -124,16 +117,16 @@ var framework = {
 		framework.bind(target,type,listener,true);
 	},
 	removeClass: function(el, className) {
-		var reg = new RegExp(&#x27;(\\s|^)&#x27; + className + &#x27;(\\s|$)&#x27;);
-		el.className = el.className.replace(reg, &#x27; &#x27;).replace(/^\s\s*/, &#x27;&#x27;).replace(/\s\s*$/, &#x27;&#x27;);
+		var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+		el.className = el.className.replace(reg, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 	},
 	addClass: function(el, className) {
 		if( !framework.hasClass(el,className) ) {
-			el.className += (el.className ? &#x27; &#x27; : &#x27;&#x27;) + className;
+			el.className += (el.className ? ' ' : '') + className;
 		}
 	},
 	hasClass: function(el, className) {
-		return el.className &#x26;&#x26; new RegExp(&#x27;(^|\\s)&#x27; + className + &#x27;(\\s|$)&#x27;).test(el.className);
+		return el.className &amp;&amp; new RegExp('(^|\\s)' + className + '(\\s|$)').test(el.className);
 	},
 	getChildByClass: function(parentEl, childClassName) {
 		var node = parentEl.firstChild;
@@ -156,7 +149,7 @@ var framework = {
 	extend: function(o1, o2, preventOverwrite) {
 		for (var prop in o2) {
 			if (o2.hasOwnProperty(prop)) {
-				if(preventOverwrite &#x26;&#x26; o1.hasOwnProperty(prop)) {
+				if(preventOverwrite &amp;&amp; o1.hasOwnProperty(prop)) {
 					continue;
 				}
 				o1[prop] = o2[prop];
@@ -184,7 +177,7 @@ var framework = {
 					var s, a = 0.1, p = 0.4;
 					if ( k === 0 ) return 0;
 					if ( k === 1 ) return 1;
-					if ( !a || a &#x3c; 1 ) { a = 1; s = p / 4; }
+					if ( !a || a &lt; 1 ) { a = 1; s = p / 4; }
 					else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
 					return ( a * Math.pow( 2, - 10 * k) * Math.sin( ( k - s ) * ( 2 * Math.PI ) / p ) + 1 );
 
@@ -217,13 +210,13 @@ var framework = {
 		}
 		var helperEl = framework.createEl(),
 			helperStyle = helperEl.style,
-			vendor = &#x27;&#x27;,
+			vendor = '',
 			features = {};
 
 		// IE8 and below
-		features.oldIE = document.all &#x26;&#x26; !document.addEventListener;
+		features.oldIE = document.all &amp;&amp; !document.addEventListener;
 
-		features.touch = &#x27;ontouchstart&#x27; in window;
+		features.touch = 'ontouchstart' in window;
 
 		if(window.requestAnimationFrame) {
 			features.raf = window.requestAnimationFrame;
@@ -233,17 +226,17 @@ var framework = {
 		features.pointerEvent = navigator.pointerEnabled || navigator.msPointerEnabled;
 
 		// fix false-positive detection of old Android in new IE
-		// (IE11 ua string contains &#x22;Android 4.0&#x22;)
+		// (IE11 ua string contains "Android 4.0")
 		
 		if(!features.pointerEvent) {
 
 			var ua = navigator.userAgent;
 
-			// Detect if device is iPhone or iPod and if it&#x27;s older than iOS 8
+			// Detect if device is iPhone or iPod and if it's older than iOS 8
 			// http://stackoverflow.com/a/14223920
 			//
 			// This detection is made because of buggy top/bottom toolbars
-			// that don&#x27;t trigger window.resize event.
+			// that don't trigger window.resize event.
 			// For more info refer to _isFixedPosition variable in core.js
 
 			if (/iP(hone|od)/.test(navigator.platform)) {
@@ -260,3 +253,4 @@ var framework = {
     ]
 </div>
 </div>
+</body></html>

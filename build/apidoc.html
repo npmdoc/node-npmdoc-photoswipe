@@ -61,12 +61,196 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.photoswipe">module photoswipe</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.photoswipe.photoswipe">
+            function <span class="apidocSignatureSpan"></span>photoswipe
+            <span class="apidocSignatureSpan">(template, UiClass, items, options)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.photoswipe" id="apidoc.module.photoswipe">module photoswipe</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.photoswipe.photoswipe" id="apidoc.element.photoswipe.photoswipe">
+        function <span class="apidocSignatureSpan"></span>photoswipe
+        <span class="apidocSignatureSpan">(template, UiClass, items, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">photoswipe = function (template, UiClass, items, options){
+
+<span class="apidocCodeCommentSpan">/*&#x3e;&#x3e;framework-bridge*/
+</span>/**
+ *
+ * Set of generic functions used by gallery.
+ *
+ * You&#x27;re free to modify anything here as long as functionality is kept.
+ *
+ */
+var framework = {
+	features: null,
+	bind: function(target, type, listener, unbind) {
+		var methodName = (unbind ? &#x27;remove&#x27; : &#x27;add&#x27;) + &#x27;EventListener&#x27;;
+		type = type.split(&#x27; &#x27;);
+		for(var i = 0; i &#x3c; type.length; i++) {
+			if(type[i]) {
+				target[methodName]( type[i], listener, false);
+			}
+		}
+	},
+	isArray: function(obj) {
+		return (obj instanceof Array);
+	},
+	createEl: function(classes, tag) {
+		var el = document.createElement(tag || &#x27;div&#x27;);
+		if(classes) {
+			el.className = classes;
+		}
+		return el;
+	},
+	getScrollY: function() {
+		var yOffset = window.pageYOffset;
+		return yOffset !== undefined ? yOffset : document.documentElement.scrollTop;
+	},
+	unbind: function(target, type, listener) {
+		framework.bind(target,type,listener,true);
+	},
+	removeClass: function(el, className) {
+		var reg = new RegExp(&#x27;(\\s|^)&#x27; + className + &#x27;(\\s|$)&#x27;);
+		el.className = el.className.replace(reg, &#x27; &#x27;).replace(/^\s\s*/, &#x27;&#x27;).replace(/\s\s*$/, &#x27;&#x27;);
+	},
+	addClass: function(el, className) {
+		if( !framework.hasClass(el,className) ) {
+			el.className += (el.className ? &#x27; &#x27; : &#x27;&#x27;) + className;
+		}
+	},
+	hasClass: function(el, className) {
+		return el.className &#x26;&#x26; new RegExp(&#x27;(^|\\s)&#x27; + className + &#x27;(\\s|$)&#x27;).test(el.className);
+	},
+	getChildByClass: function(parentEl, childClassName) {
+		var node = parentEl.firstChild;
+		while(node) {
+			if( framework.hasClass(node, childClassName) ) {
+				return node;
+			}
+			node = node.nextSibling;
+		}
+	},
+	arraySearch: function(array, value, key) {
+		var i = array.length;
+		while(i--) {
+			if(array[i][key] === value) {
+				return i;
+			}
+		}
+		return -1;
+	},
+	extend: function(o1, o2, preventOverwrite) {
+		for (var prop in o2) {
+			if (o2.hasOwnProperty(prop)) {
+				if(preventOverwrite &#x26;&#x26; o1.hasOwnProperty(prop)) {
+					continue;
+				}
+				o1[prop] = o2[prop];
+			}
+		}
+	},
+	easing: {
+		sine: {
+			out: function(k) {
+				return Math.sin(k * (Math.PI / 2));
+			},
+			inOut: function(k) {
+				return - (Math.cos(Math.PI * k) - 1) / 2;
+			}
+		},
+		cubic: {
+			out: function(k) {
+				return --k * k * k + 1;
+			}
+		}
+		/*
+			elastic: {
+				out: function ( k ) {
+
+					var s, a = 0.1, p = 0.4;
+					if ( k === 0 ) return 0;
+					if ( k === 1 ) return 1;
+					if ( !a || a &#x3c; 1 ) { a = 1; s = p / 4; }
+					else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
+					return ( a * Math.pow( 2, - 10 * k) * Math.sin( ( k - s ) * ( 2 * Math.PI ) / p ) + 1 );
+
+				},
+			},
+			back: {
+				out: function ( k ) {
+					var s = 1.70158;
+					return --k * k * ( ( s + 1 ) * k + s ) + 1;
+				}
+			}
+		*/
+	},
+
+	/**
+	 *
+	 * @return {object}
+	 *
+	 * {
+	 *  raf : request animation frame function
+	 *  caf : cancel animation frame function
+	 *  transfrom : transform property key (with vendor), or null if not supported
+	 *  oldIE : IE8 or below
+	 * }
+	 *
+	 */
+	detectFeatures: function() {
+		if(framework.features) {
+			return framework.features;
+		}
+		var helperEl = framework.createEl(),
+			helperStyle = helperEl.style,
+			vendor = &#x27;&#x27;,
+			features = {};
+
+		// IE8 and below
+		features.oldIE = document.all &#x26;&#x26; !document.addEventListener;
+
+		features.touch = &#x27;ontouchstart&#x27; in window;
+
+		if(window.requestAnimationFrame) {
+			features.raf = window.requestAnimationFrame;
+			features.caf = window.cancelAnimationFrame;
+		}
+
+		features.pointerEvent = navigator.pointerEnabled || navigator.msPointerEnabled;
+
+		// fix false-positive detection of old Android in new IE
+		// (IE11 ua string contains &#x22;Android 4.0&#x22;)
+		
+		if(!features.pointerEvent) {
+
+			var ua = navigator.userAgent;
+
+			// Detect if device is iPhone or iPod and if it&#x27;s older than iOS 8
+			// http://stackoverflow.com/a/14223920
+			//
+			// This detection is made because of buggy top/bottom toolbars
+			// that don&#x27;t trigger window.resize event.
+			// For more info refer to _isFixedPosition variable in core.js
+
+			if (/iP(hone|od)/.test(navigator.platform)) {
+				var v = (navigator.appVersion).match( ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 
