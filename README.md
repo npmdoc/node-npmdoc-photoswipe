@@ -1,9 +1,14 @@
-# api documentation for  [photoswipe (v4.1.1)](http://photoswipe.com)  [![npm package](https://img.shields.io/npm/v/npmdoc-photoswipe.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-photoswipe) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-photoswipe.svg)](https://travis-ci.org/npmdoc/node-npmdoc-photoswipe)
+# npmdoc-photoswipe
+
+#### api documentation for  [photoswipe (v4.1.1)](http://photoswipe.com)  [![npm package](https://img.shields.io/npm/v/npmdoc-photoswipe.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-photoswipe) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-photoswipe.svg)](https://travis-ci.org/npmdoc/node-npmdoc-photoswipe)
+
 #### JavaScript gallery
 
-[![NPM](https://nodei.co/npm/photoswipe.png?downloads=true)](https://www.npmjs.com/package/photoswipe)
+[![NPM](https://nodei.co/npm/photoswipe.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/photoswipe)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-photoswipe/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-photoswipe_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-photoswipe/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-photoswipe/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-photoswipe/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-photoswipe/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-photoswipe/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-photoswipe/build/screenCapture.npmPackageListing.svg)
 
@@ -63,13 +68,11 @@
     "main": "dist/photoswipe.js",
     "maintainers": [
         {
-            "name": "dimsemenov",
-            "email": "diiiimaaaa@gmail.com"
+            "name": "dimsemenov"
         }
     ],
     "name": "photoswipe",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/dimsemenov/Photoswipe.git"
@@ -80,16 +83,6 @@
     "version": "4.1.1"
 }
 ```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module photoswipe](#apidoc.module.photoswipe)
-
-
-
-# <a name="apidoc.module.photoswipe"></a>[module photoswipe](#apidoc.module.photoswipe)
 
 
 
